@@ -1,6 +1,13 @@
 from function import extrair_filmes
+import os
+import glob
 
 def main():
+    # Limpar arquivos na pasta entrada
+    files = glob.glob('entrada/*')
+    for f in files:
+        os.remove(f)
+    
     print("Selecione a funcionalidade:")
     print("1. Extrair filmes")
     opcao = input("Digite o número da opção desejada: ")

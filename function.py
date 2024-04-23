@@ -5,27 +5,36 @@ import os
 def extrair_filmes():
     input_file = input("Digite o caminho completo do arquivo CSV: ")
     nome_saida = input("Digite o nome do arquivo de saída (sem extensão): ") + '.txt'
-    output_file = f'saida/{nome_saida}'  # Arquivo de saída com nome customizado
+    output_file = f'saida/{nome_saida}'
 
-    # Corrige o nome do arquivo de entrada para usar na cópia
     filename = os.path.basename(input_file)
-
-    # Copiar o arquivo original para a pasta entrada
     shutil.copy(input_file, os.path.join('entrada', filename))
 
+    escolha_coluna = input("Digite o número da coluna ou o nome dela para extrair: ")
+    coluna = None
+
     # Processar o arquivo
-    coluna = int(input("Digite o número da coluna para extrair (começando de 1): ")) - 1
     titulos = []
     with open(os.path.join('entrada', filename), 'r', newline='', encoding='utf-8') as file:
         reader = csv.reader(file)
-        next(reader)  # Pula a primeira linha
+        cabecalho = next(reader)
+        if escolha_coluna.isdigit():
+            coluna = int(escolha_coluna) - 1
+        else:
+            if escolha_coluna in cabecalho:
+                coluna = cabecalho.index(escolha_coluna)
+        
+        if coluna is None or coluna >= len(cabecalho):
+            print("Coluna inválida.")
+            return
+
         for row in reader:
             if coluna < len(row):
                 titulos.append(row[coluna].strip('"'))
 
-    remover_duplicatas = input("Deseja remover nomes duplicados? (sim/não): ")
-    if remover_duplicatas.lower() == 'sim':
-        titulos = list(set(titulos))
+    count_total = len(titulos)
+    titulos = list(set(titulos))
+    count_duplicadas = count_total - len(titulos)
 
     titulos.sort()
 
@@ -38,3 +47,7 @@ def extrair_filmes():
                 file.write(f"{title}\n")
 
     print(f"Arquivo processado com sucesso e salvo em '{output_file}'")
+    print(f"Inicialmente tinha {count_total} filmes/séries.")
+    print(f"Foram removidos {count_duplicadas} filmes/séries duplicados.")
+    print(f"Agora o total de filmes/séries é {len(titulos)}.")
+
