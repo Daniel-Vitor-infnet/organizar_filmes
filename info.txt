@@ -1,0 +1,48 @@
+# Estrutura de Pastas e Arquivos
+
+- **/entrada**
+  - Diretório para armazenar cópias dos arquivos `.csv` que são processados.
+- **/saida**
+  - Diretório onde os arquivos resultantes são salvos.
+- **function.py**
+  - Contém todas as funções principais de processamento de dados.
+- **index.py**
+  - Arquivo principal que executa a interface com o usuário.
+
+## Detalhes dos Arquivos
+
+### function.py
+- `extrair_filmes()`: Processa arquivos `.csv`, permitindo ao usuário especificar a coluna de interesse pelo número ou nome. Remove linhas duplicadas se desejado e pode numerar as linhas resultantes.
+- `combinar_arquivos()`: Combina dois arquivos `.txt`, removendo duplicatas e salvando uma lista única e ordenada.
+
+### index.py
+- Executa a interface com o usuário. Oferece um menu para escolher entre extrair dados de filmes ou combinar arquivos. Limpa automaticamente a pasta `entrada` antes de executar as funcionalidades.
+
+## Funcionalidades do Código
+
+1. **Extrair Filmes**
+   - O usuário é solicitado a fornecer o caminho para um arquivo `.csv`.
+   - O arquivo é automaticamente copiado para a pasta `/entrada`.
+   - O usuário pode escolher qual coluna extrair, seja pelo número da coluna ou pelo nome dela.
+   - O programa pergunta se o usuário deseja remover duplicatas.
+   - Os resultados podem ser numerados a pedido do usuário.
+   - O arquivo final é salvo na pasta `/saida` com um nome especificado pelo usuário.
+
+2. **Combinar Arquivos**
+   - O usuário insere os caminhos para dois arquivos `.txt`.
+   - O sistema combina os conteúdos dos dois arquivos, removendo quaisquer duplicatas.
+   - A lista combinada e única é salva em `/saida` com um nome especificado pelo usuário.
+
+## Resumo das Operações
+
+- **Limpeza de Entrada**: Antes de qualquer processamento, a pasta `entrada` é limpa para evitar confusão com arquivos de execuções anteriores.
+- **Entrada do Usuário**: Todas as operações requerem entradas específicas do usuário, como caminhos de arquivos e escolhas de configuração.
+- **Saída Processada**: Os resultados são sempre salvos na pasta `saida`, facilitando a organização e o acesso aos dados processados.
+
+## Execução do Projeto
+
+Para executar o projeto:
+1. Abra o terminal ou prompt de comando.
+2. Navegue até o diretório do projeto.
+3. Execute `python index.py`.
+4. Siga as instruções na tela para escolher e configurar a funcionalidade desejada.

@@ -1,7 +1,7 @@
-from function import extrair_filmes
+from function import extrair_filmes, combinar_arquivos
+
 import os
 import glob
-
 def main():
     # Limpar arquivos na pasta entrada
     files = glob.glob('entrada/*')
@@ -10,10 +10,13 @@ def main():
     
     print("Selecione a funcionalidade:")
     print("1. Extrair filmes")
+    print("2. Combinar arquivos")
     opcao = input("Digite o número da opção desejada: ")
 
     if opcao == '1':
         extrair_filmes()
+    elif opcao == '2':
+        combinar_arquivos()
     else:
         print("Opção inválida!")
 

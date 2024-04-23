@@ -51,3 +51,25 @@ def extrair_filmes():
     print(f"Foram removidos {count_duplicadas} filmes/séries duplicados.")
     print(f"Agora o total de filmes/séries é {len(titulos)}.")
 
+def combinar_arquivos():
+    # Solicita ao usuário os nomes dos arquivos
+    file1_path = input("Digite o caminho do primeiro arquivo .txt: ")
+    file2_path = input("Digite o caminho do segundo arquivo .txt: ")
+    output_filename = input("Digite o nome do arquivo de saída (sem extensão): ") + '.txt'
+    output_file = f'saida/{output_filename}'
+
+    # Lê os arquivos e combina as listas
+    with open(file1_path, 'r', encoding='utf-8') as file1, open(file2_path, 'r', encoding='utf-8') as file2:
+        list1 = file1.read().splitlines()
+        list2 = file2.read().splitlines()
+
+    # Combina e remove duplicatas usando conjuntos
+    combined_list = sorted(set(list1 + list2))
+
+    # Escreve o resultado no arquivo de saída
+    with open(output_file, 'w', encoding='utf-8') as file:
+        for item in combined_list:
+            file.write(f"{item}\n")
+
+    print(f"Arquivos combinados com sucesso. O arquivo resultante '{output_filename}' foi salvo em 'saida/'.")
+
